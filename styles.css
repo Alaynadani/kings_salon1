@@ -1,0 +1,219 @@
+@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#141312;}html{overflow-y:auto!important;}body{min-height:100vh;overflow-y:visible!important;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}
+
+    body {
+      min-height: max(884px, 884px);
+    }
+
+    .service-card[hidden] { display: none; }
+    dialog::backdrop { backdrop-filter: blur(4px); }
+    dialog:not([open]) { display: none; }
+
+    html {
+      overflow-x: hidden !important;
+      height: auto !important;
+      max-height: none !important;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html {
+      overflow-y: scroll !important;
+      scrollbar-width: auto !important;
+      touch-action: pan-y;
+    }
+
+    body {
+      overflow: visible !important;
+      height: auto !important;
+      touch-action: pan-y;
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: block !important;
+      width: 12px;
+    }
+  
+
+  /* Hide scrollbars on ALL elements (Webkit) */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbars on ALL elements (Firefox) */
+  * {
+    scrollbar-width: none;
+  }
+
+  /* Suppress horizontal overflow and legacy IE/Edge */
+  html {
+    overflow-x: hidden !important;
+    -ms-overflow-style: none;
+    min-height: auto !important;
+  }
+
+  /* Global text selection highlight color override inside all iframe modes */
+  ::selection {
+    background-color: rgba(96, 86, 240, 0.3) !important;
+    color: inherit !important;
+  }
+  ::-moz-selection {
+    background-color: rgba(96, 86, 240, 0.3) !important;
+    color: inherit !important;
+  }
+
+  /* Suppress browser default focus outlines and box-shadow glows globally */
+  *:focus, *:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+
+  /* ─── Animation styles ─── */
+  .stitch-anim-highlight {
+    outline: 2px solid #6056f080;
+    outline-offset: 2px;
+    border-radius: 4px;
+    transition: outline-color 0.4s ease;
+  }
+  .stitch-anim-highlight-fade {
+    outline-color: transparent;
+  }
+  @keyframes stitch-anim-fade-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes stitch-anim-pure-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .stitch-anim-fade-in {
+    animation: stitch-anim-fade-in 0.3s ease forwards;
+  }
+
+  /* ─── Drawing rectangle overlay ─── */
+  .stitch-anim-draw-overlay {
+    position: fixed;
+    border: 2px solid #6056f099;
+    border-radius: 6px;
+    pointer-events: none;
+    z-index: 998;
+    clip-path: polygon(
+      0% 0%, 0% 0%,
+      0% 0%, 0% 0%,
+      0% 0%, 0% 0%
+    );
+    animation: stitch-anim-draw-rect 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  @keyframes stitch-anim-draw-rect {
+    0%   { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%); }
+    30%  { clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 100% 0%, 0% 0%, 0% 0%); }
+    55%  { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 0% 0%, 0% 0%); }
+    80%  { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 100%, 0% 0%); }
+    100% { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%, 0% 0%); }
+  }
+  .stitch-anim-draw-overlay.fading {
+    animation: stitch-anim-border-fade 0.5s ease forwards;
+  }
+  @keyframes stitch-anim-border-fade {
+    to { opacity: 0; }
+  }
+  /* ─── Image reveal crossfade ─── */
+  .stitch-anim-img-dimming {
+    transition: opacity 0.2s ease !important;
+    opacity: 0.15 !important;
+  }
+  .stitch-anim-img-revealing {
+    transition: opacity 0.35s ease !important;
+    opacity: 1 !important;
+  }
+  .stitch-anim-cursor::after {
+    content: '|';
+    font-weight: 100;
+    animation: stitch-anim-blink 0.6s step-end infinite;
+    color: #6056f0B3;
+    margin-left: 1px;
+  }
+  @keyframes stitch-anim-blink {
+    50% { opacity: 0; }
+  }
+
+  /* ─── AI Agent Cursor ─── */
+  #stitch-agent-cursor {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 0px;
+    transition: left 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                top 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.25s ease;
+    opacity: 0;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));
+  }
+  #stitch-agent-cursor.working {
+    animation: stitch-anim-wobble 0.8s ease-in-out infinite;
+  }
+  #stitch-agent-cursor.drawing {
+    animation: none;
+    transition: left 0.12s linear, top 0.12s linear, opacity 0.25s ease;
+  }
+  @keyframes stitch-anim-wobble {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25%  { transform: translate(1px, -1px) rotate(2deg); }
+    50%  { transform: translate(-1px, 1px) rotate(-1deg); }
+    75%  { transform: translate(1px, 0px) rotate(1deg); }
+  }
+  #stitch-agent-cursor .cursor-pointer {
+    display: block;
+  }
+  #stitch-agent-cursor .cursor-text,
+  #stitch-agent-cursor .cursor-paint {
+    display: none;
+  }
+  #stitch-agent-cursor.text-mode .cursor-pointer,
+  #stitch-agent-cursor.text-mode .cursor-paint {
+    display: none;
+  }
+  #stitch-agent-cursor.text-mode .cursor-text {
+    display: block;
+  }
+  #stitch-agent-cursor.paint-mode .cursor-pointer,
+  #stitch-agent-cursor.paint-mode .cursor-text {
+    display: none;
+  }
+  #stitch-agent-cursor.paint-mode .cursor-paint {
+    display: block;
+  }
+  #stitch-cursor-label {
+    margin-top: 14px;
+    margin-left: -3px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+  }
+
+  /* ─── Active Element Indicator ─── */
+  @keyframes stitch-indicator-pulse {
+    0%, 100% {
+      opacity: 1.0;
+      border-color: #6056f0B3;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+      opacity: 0.5;
+      border-color: #7168f6E6;
+      box-shadow: 0 4px 16px #7168f666, inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+  }
+  .stitch-active-indicator {
+    position: absolute;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #6056f033, #7168f633);
+    border: 1.5px solid #6056f0B3;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    animation: stitch-indicator-pulse 1.5s ease-in-out infinite;
+    pointer-events: auto;
+    cursor: not-allowed;
+    z-index: 3;
+  }
+

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sovereign Grooming Lounge Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#C47B38; --secondary:#8C3F23; --tertiary:#E0A96D; --neutral:#121110; }
+    * { box-sizing:border-box; }
+    body { margin:0; padding:48px; color:var(--neutral); background:#f5f0ed; font-family:'Plus Jakarta Sans',sans-serif; }
+    h1,h2 { font-family:'EB Garamond',serif; }
+    h1 { margin:0 0 8px; font-size:48px; }
+    p { color:#605e5c; }
+    .swatches { display:grid; grid-template-columns:repeat(4,minmax(120px,1fr)); gap:16px; margin:32px 0; }
+    .swatch { min-height:120px; padding:16px; display:flex; flex-direction:column; justify-content:end; border-radius:8px; box-shadow:0 5px 20px #12111018; }
+    .swatch strong { font-size:13px; }
+    .swatch span { font-size:12px; opacity:.8; }
+    .primary { background:var(--primary); color:#fff; } .secondary { background:var(--secondary); color:#fff; }
+    .tertiary { background:var(--tertiary); } .neutral { background:var(--neutral); color:#fff; }
+    .type { display:flex; gap:40px; align-items:baseline; padding:24px 0; border-top:1px solid #d7d0cb; }
+    .headline { font:600 42px 'EB Garamond',serif; } .body { font-size:18px; } .label { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  </style>
+</head>
+<body>
+  <p>DESIGN SYSTEM / SOVEREIGN GROOMING LOUNGE</p>
+  <h1>King's Salon</h1>
+  <p>Warm copper, cognac, and espresso tones for a modern English barbering sanctuary.</p>
+  <section class="swatches" aria-label="Color palette">
+    <div class="swatch primary"><strong>Primary</strong><span>#C47B38</span></div>
+    <div class="swatch secondary"><strong>Secondary</strong><span>#8C3F23</span></div>
+    <div class="swatch tertiary"><strong>Tertiary</strong><span>#E0A96D</span></div>
+    <div class="swatch neutral"><strong>Neutral</strong><span>#121110</span></div>
+  </section>
+  <section class="type">
+    <div class="headline">Crafted precision</div>
+    <div class="body">Plus Jakarta Sans body copy</div>
+    <div class="label">Label / Action</div>
+  </section>
+</body>
+</html>
